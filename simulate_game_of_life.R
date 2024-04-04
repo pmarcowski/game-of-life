@@ -114,24 +114,53 @@ game_of_life <- function(size = 20, tlength = 50, prob = 0.5, rule = "B3/S23") {
 
     # Update grid for next iteration
     grid <- new_grid
+    
+    # Calculate number of alive cells
+    alive_cells <- sum(grid)
 
     # Visualize new grid
-    image(grid, col = c("white", "black"), axes = FALSE)
+    image(1:size, 1:size, grid, col = c("white", "black"), axes = FALSE, xlab = "", ylab = "")
     box()
-
-    # Add title and iteration number
-    title(paste("Simulation of the Game of Life:", rule))
-    mtext(paste("Time:", t, "/", tlength), side = 1, line = 0.25)
-
+    
     # Add legend for cell types
     legend(
       x = "bottom",
-      inset = c(0.5, -0.175),
+      inset = c(0.5, -0.15),
       legend = c("Dead", "Alive"),
       fill = c("white", "black"),
       horiz = TRUE,
       xpd = TRUE,
       title = "Cell state"
+    )
+    
+    # Create vector of labels for statistics
+    labels <- c(
+      substitute(paste(bold("Simulation of the Game of Life"))),
+      paste("Rule:", rule),
+      paste("Time:", t, "/", tlength),
+      paste("Alive cells:", alive_cells)
+    )
+    
+    # Set horizontal and vertical offsets for labels positioning relative to plot
+    x_offset <- 2
+    y_offset <- 0.05
+    
+    # Generate sequence of y-coordinates for labels
+    y_coords <- seq(
+      from = size - y_offset * size, 
+      by = -y_offset * size, 
+      length.out = length(labels)
+      )
+    
+    # Display labels by applying text function to each label and y-coordinate
+    mapply(
+      text,
+      x = rep(-x_offset, length(labels)),
+      y = y_coords,
+      labels = labels,
+      pos = 2,
+      cex = 0.8,
+      xpd = TRUE
     )
 
     Sys.sleep(0.1) # pause for animation effect
