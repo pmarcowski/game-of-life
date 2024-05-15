@@ -1,3 +1,5 @@
+![Screenshot](screenshot.png)
+
 # Simulate Conway's Game of Life
 This script simulates variations of Conway's Game of Life, a cellular automaton devised by mathematician John Conway. The Game of Life is a zero-player game where the evolution of the grid is determined by the initial state and a set of rules that govern the birth, survival, and death of cells.
 
